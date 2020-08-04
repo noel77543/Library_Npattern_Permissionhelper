@@ -24,7 +24,7 @@
 
 ---
 
-### 使用方式
+### 使用方式use
 - Activity
         
         public  class YourActivity extends AnyActivity {
