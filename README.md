@@ -144,3 +144,12 @@
 ### 示例sample
 
 [Demo](https://github.com/noel77543/Demo_PermissionHelper)
+
+
+---
+
+### 備註remark
+- @DeniedPermission 非必要，只有在需要處理當使用者拒絕對應的targetEvent所需權限時須執行行為才需設置
+- @NeverAskPermission 非必要，只有在需要處理當使用者勾選不再提醒並拒絕或曾經如此操作對應的targetEvent所需權限時須執行行為才需設置
+
+
