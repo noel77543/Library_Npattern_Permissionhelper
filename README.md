@@ -1,5 +1,5 @@
 # Library_Npattern_Permissionhelper
-應用映射的設計概念將權限處裡簡化，
+應用映射的設計概念將權限處理簡化，
 
 
 
