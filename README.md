@@ -26,6 +26,7 @@
 
 ### 使用方式
 - Activity
+        
         public  class YourActivity extends AnyActivity {
 
                   .
@@ -36,8 +37,8 @@
                 @Override
                 public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
                     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-                     boolean isReject = grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED;
-                     PermissionHelper.getInstance().onFragmentRequestPermissionsResult(this,permissions,isReject,requestCode);
+                    boolean isReject = grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED;
+                    PermissionHelper.getInstance().onActivityRequestPermissionsResult(this, permissions, isReject, requestCode);
                 }
 
                 //-----------
