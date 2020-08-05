@@ -37,8 +37,7 @@
                 @Override
                 public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
                     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-                    boolean isReject = grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED;
-                    PermissionHelper.getInstance().onRequestPermissionsResult(this, permissions, isReject, requestCode);
+                    PermissionHelper.getInstance().onRequestPermissionsResult(this, requestCode , permissions, grantResults);
                 }
 
                 //-----------
@@ -95,8 +94,7 @@
           @Override
           public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
               super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-               boolean isReject = grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED;
-               PermissionHelper.getInstance().onRequestPermissionsResult(this,permissions,isReject,requestCode);
+               PermissionHelper.getInstance().onRequestPermissionsResult(this,requestCode,permissions,grantResults);
           }
           
           //-----------
