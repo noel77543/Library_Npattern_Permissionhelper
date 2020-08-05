@@ -190,7 +190,7 @@ public class PermissionHelper {
      * @param grantResults
      * @param targetEvent
      */
-    public void onFragmentRequestPermissionsResult(Activity activity, int targetEvent, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(Activity activity, int targetEvent, @NonNull String[] permissions, @NonNull int[] grantResults) {
         // 授權被拒絕
         if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
             //不再提醒
@@ -211,13 +211,13 @@ public class PermissionHelper {
     //------------
 
     /***
-     * onRequestPermissionsResult for activity
+     * onRequestPermissionsResult for fragment
      * @param fragment
      * @param permissions
      * @param grantResults
      * @param targetEvent
      */
-    public void onFragmentRequestPermissionsResult(Fragment fragment, int targetEvent, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(Fragment fragment, int targetEvent, @NonNull String[] permissions, @NonNull int[] grantResults) {
         // 授權被拒絕
         if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
             //不再提醒
