@@ -124,11 +124,11 @@ public class PermissionHelper {
     //------------
 
     /***
-     * 必須但使用者選擇曾經拒絕的權限 for activity
+     * 必須但使用者選擇曾經拒絕的權限
      */
-    private void startDeniedAnnotation(Activity activity, int targetEvent) {
+    private void startDeniedAnnotation(Object object, int targetEvent) {
         //此class中所有function
-        Method[] methods = activity.getClass().getDeclaredMethods();
+        Method[] methods = object.getClass().getDeclaredMethods();
         for (Method method : methods) {
             //如果function具備指定的annotation
             if (method.isAnnotationPresent(DeniedPermission.class)) {
@@ -139,7 +139,7 @@ public class PermissionHelper {
                         try {
                             method.setAccessible(true);
                             //執行該function
-                            method.invoke(activity);
+                            method.invoke(object);
                         } catch (IllegalAccessException | InvocationTargetException e) {
                             e.printStackTrace();
                         }
@@ -154,11 +154,11 @@ public class PermissionHelper {
     //------------
 
     /***
-     * 必須但使用者曾選擇不再詢問的權限 for activity
+     * 必須但使用者曾選擇不再詢問的權限
      */
-    private void startNeverAskAgainAnnotation(Activity activity, int targetEvent) {
+    private void startNeverAskAgainAnnotation(Object object, int targetEvent) {
         //此class中所有function
-        Method[] methods = activity.getClass().getDeclaredMethods();
+        Method[] methods = object.getClass().getDeclaredMethods();
         for (Method method : methods) {
             //如果function具備指定的annotation
             if (method.isAnnotationPresent(NeverAskPermission.class)) {
@@ -169,7 +169,7 @@ public class PermissionHelper {
                         try {
                             method.setAccessible(true);
                             //執行該function
-                            method.invoke(activity);
+                            method.invoke(object);
                         } catch (IllegalAccessException | InvocationTargetException e) {
                             e.printStackTrace();
                         }
@@ -180,68 +180,6 @@ public class PermissionHelper {
             }
         }
     }
-
-    //------------
-
-    /***
-     * 必須但使用者選擇曾經拒絕的權限 for fragment
-     */
-    private void startDeniedAnnotation(Fragment fragment, int targetEvent) {
-        //此class中所有function
-        Method[] methods = fragment.getClass().getDeclaredMethods();
-        for (Method method : methods) {
-            //如果function具備指定的annotation
-            if (method.isAnnotationPresent(DeniedPermission.class)) {
-                //取得annotation
-                DeniedPermission deniedPermission = method.getAnnotation(DeniedPermission.class);
-                if (deniedPermission != null) {
-                    if (deniedPermission.targetEvent() == targetEvent) {
-                        try {
-                            method.setAccessible(true);
-                            //執行該function
-                            method.invoke(fragment);
-                        } catch (IllegalAccessException | InvocationTargetException e) {
-                            e.printStackTrace();
-                        }
-                        //找到目標function 即可跳脫迴圈
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
-
-    //------------
-
-    /***
-     * 必須但使用者曾選擇不再詢問的權限 for fragment
-     */
-    private void startNeverAskAgainAnnotation(Fragment fragment, int targetEvent) {
-        //此class中所有function
-        Method[] methods = fragment.getClass().getDeclaredMethods();
-        for (Method method : methods) {
-            //如果function具備指定的annotation
-            if (method.isAnnotationPresent(NeverAskPermission.class)) {
-                //取得annotation
-                NeverAskPermission neverAskPermission = method.getAnnotation(NeverAskPermission.class);
-                if (neverAskPermission != null) {
-                    if (neverAskPermission.targetEvent() == targetEvent) {
-                        try {
-                            method.setAccessible(true);
-                            //執行該function
-                            method.invoke(fragment);
-                        } catch (IllegalAccessException | InvocationTargetException e) {
-                            e.printStackTrace();
-                        }
-                        //找到目標function 即可跳脫迴圈
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
 
     //------------
 
