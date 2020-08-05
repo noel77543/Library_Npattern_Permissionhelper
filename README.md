@@ -1,5 +1,5 @@
 # Library_Npattern_Permissionhelper
-應用映射的設計概念將權限處理簡化，
+以最簡單的調用方式，實現最火的動態權限索取庫。
 
 
 
@@ -19,7 +19,7 @@
   - Add the dependency
   
         dependencies {
-                implementation 'com.github.noel77543:Library_Npattern_Permissionhelper:Tag'
+                implementation 'com.github.noel77543:Library_Npattern_Permissionhelper:v1.0.2'
         }
 
 ---
