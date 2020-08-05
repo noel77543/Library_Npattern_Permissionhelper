@@ -187,12 +187,12 @@ public class PermissionHelper {
      * onRequestPermissionsResult for activity
      * @param activity
      * @param permissions
-     * @param isReject
+     * @param grantResults
      * @param targetEvent
      */
-    public void onActivityRequestPermissionsResult(Activity activity, String[] permissions, boolean isReject, int targetEvent) {
+    public void onFragmentRequestPermissionsResult(Activity activity, int targetEvent, @NonNull String[] permissions, @NonNull int[] grantResults) {
         // 授權被拒絕
-        if (isReject) {
+        if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
             //不再提醒
             if (shouldShowRequestPermissionRationale(activity, permissions)) {
                 startNeverAskAgainAnnotation(activity, targetEvent);
@@ -214,12 +214,12 @@ public class PermissionHelper {
      * onRequestPermissionsResult for activity
      * @param fragment
      * @param permissions
-     * @param isReject
+     * @param grantResults
      * @param targetEvent
      */
-    public void onFragmentRequestPermissionsResult(Fragment fragment, String[] permissions, boolean isReject, int targetEvent) {
+    public void onFragmentRequestPermissionsResult(Fragment fragment, int targetEvent, @NonNull String[] permissions, @NonNull int[] grantResults) {
         // 授權被拒絕
-        if (isReject) {
+        if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
             //不再提醒
             if (shouldShowRequestPermissionRationale(fragment.getActivity(), permissions)) {
                 startNeverAskAgainAnnotation(fragment, targetEvent);
