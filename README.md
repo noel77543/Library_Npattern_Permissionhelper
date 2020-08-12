@@ -50,7 +50,7 @@
                      yourButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            PermissionHelper.getInstance().startWithPermissionCheck(MainFragment.this,EVENT_WHATEVER_YOU_WANT_2);
+                            PermissionHelper.getInstance().startWithPermissionCheck(YourActivity.this,EVENT_WHATEVER_YOU_WANT_2);
                         }
                     });
                 }
@@ -105,7 +105,7 @@
               yourButton.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View view) {
-                      PermissionHelper.getInstance().startWithPermissionCheck(MainFragment.this,EVENT_WHATEVER_YOU_WANT_2);
+                      PermissionHelper.getInstance().startWithPermissionCheck(YourFragment.this,EVENT_WHATEVER_YOU_WANT_2);
                   }
               });
           } 
