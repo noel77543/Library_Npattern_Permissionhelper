@@ -27,7 +27,7 @@
 ### 使用方式use
 - Activity
         
-        public  class YourActivity extends AnyActivity {
+        public  class YourActivity extends AnyYourActivity {
 
                   .
                   .
@@ -84,7 +84,7 @@
 
 - Fragment
     
-      public  class YourFragment extends Fragment {
+      public  class YourFragment extends AnyYourFragment {
 
             .
             .
@@ -149,5 +149,5 @@
 ### 備註remark
 - @DeniedPermission 非必要，只有在需要處理當使用者拒絕對應的targetEvent所需權限時須執行行為才需設置
 - @NeverAskPermission 非必要，只有在需要處理當使用者勾選不再提醒並拒絕或曾經如此操作對應的targetEvent所需權限時須執行行為才需設置
-
+- 框架不支援抽象類中映射
 
