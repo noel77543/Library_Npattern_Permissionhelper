@@ -63,7 +63,7 @@
                      yourButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            PermissionHelper.getInstance().startWithPermissionCheck(this, new OnPermissionStateListener() {
+                            PermissionHelper.getInstance().startWithPermissionCheck(YourActivity.this, new OnPermissionStateListener() {
                               @Override
                               public String[] obtainPermissions() {
                                   //以詳細地理位置,模糊地理位置權限為例
@@ -114,7 +114,7 @@
               yourButton.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View view) {
-                     PermissionHelper.getInstance().startWithPermissionCheck(this, new OnPermissionStateListener() {
+                     PermissionHelper.getInstance().startWithPermissionCheck(YourFragment.this, new OnPermissionStateListener() {
                        @Override
                        public String[] obtainPermissions() {
                            //以詳細地理位置,模糊地理位置權限為例
