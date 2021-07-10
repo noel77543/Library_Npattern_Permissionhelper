@@ -19,10 +19,24 @@
   - Add the dependency
   
         dependencies {
-                implementation 'com.github.noel77543:Library_Npattern_Permissionhelper:v1.0.2'
+                implementation 'com.github.noel77543:Library_Npattern_Permissionhelper:v1.1.0'
         }
 
 ---
+
+### 接口interface
+
+        public interface OnPermissionStateListener {
+            //所需權限
+            String[] obtainPermissions();
+            //成功授權
+            void onAcceptPermission();
+            //拒絕授權
+            void onRejectPermission();
+            //不再提醒
+            void onNeverAskAgainPermission();
+        }
+
 
 ### 使用方式use
 - Activity
@@ -32,12 +46,11 @@
                   .
                   .
                   .
-                private final int EVENT_WHATEVER_YOU_WANT = 123;
 
                 @Override
                 public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
                     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-                    PermissionHelper.getInstance().onRequestPermissionsResult(this, requestCode , permissions, grantResults);
+                    PermissionHelper.getInstance().onRequestPermissionsResult(this, permissions, grantResults);
                 }
 
                 //-----------
@@ -50,33 +63,30 @@
                      yourButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            PermissionHelper.getInstance().startWithPermissionCheck(YourActivity.this,EVENT_WHATEVER_YOU_WANT_2);
+                            PermissionHelper.getInstance().startWithPermissionCheck(this, new OnPermissionStateListener() {
+                              @Override
+                              public String[] obtainPermissions() {
+                                  //以詳細地理位置,模糊地理位置權限為例
+                                  return new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+                              }
+                             
+                              @Override
+                              public void onAcceptPermission() {
+                                  
+                              }
+
+                              @Override
+                              public void onRejectPermission() {
+                                   
+                              }
+
+                              @Override
+                              public void onNeverAskAgainPermission() {
+                                  
+                              }
+                          });
                         }
                     });
-                }
-                
-                //-----------
-
-                //事件必須與startWithPermissionCheck中的int一致，permission中添加欲索取的權限，倘若權限已具備則直接執行doSomethingNeedPermission方法反之發起索取
-                @ObtainPermission(targetEvent = EVENT_WHATEVER_YOU_WANT, permissions = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.CAMERA})
-                private void doSomethingNeedPermission() {
-                    ...
-                }
-                
-                //-----------
-                
-                //當使用者拒絕你發起的權限索取，事件必須與startWithPermissionCheck中的int一致
-                @DeniedPermission(targetEvent = EVENT_WHATEVER_YOU_WANT)
-                private void deniedPermission(){
-                    ...
-                }
-                
-                //-----------
-                
-                //當使用者選擇不再提醒並拒絕或者曾如此操做過，事件必須與startWithPermissionCheck中的int一致
-                @NeverAskPermission(targetEvent = EVENT_WHATEVER_YOU_WANT)
-                private void neverAskAgainPermission(){
-                    ...
                 }
             }
 
@@ -89,12 +99,11 @@
             .
             .
             .
-          private final int EVENT_WHATEVER_YOU_WANT_2 = 456;
           
           @Override
           public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
               super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-               PermissionHelper.getInstance().onRequestPermissionsResult(this,requestCode,permissions,grantResults);
+              PermissionHelper.getInstance().onRequestPermissionsResult(this, permissions,grantResults);
           }
           
           //-----------
@@ -105,34 +114,31 @@
               yourButton.setOnClickListener(new View.OnClickListener() {
                   @Override
                   public void onClick(View view) {
-                      PermissionHelper.getInstance().startWithPermissionCheck(YourFragment.this,EVENT_WHATEVER_YOU_WANT_2);
+                     PermissionHelper.getInstance().startWithPermissionCheck(this, new OnPermissionStateListener() {
+                       @Override
+                       public String[] obtainPermissions() {
+                           //以詳細地理位置,模糊地理位置權限為例
+                           return new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
+                       }
+                      
+                       @Override
+                       public void onAcceptPermission() {
+                           
+                       }
+
+                       @Override
+                       public void onRejectPermission() {
+                            
+                       }
+
+                       @Override
+                       public void onNeverAskAgainPermission() {
+                           
+                       }
                   }
               });
           } 
-          
-          //-----------
-          
-          //事件必須與startWithPermissionCheck中的int一致，permission中添加欲索取的權限，倘若權限已具備則直接執行doSomethingNeedPermission方法反之發起索取
-          @ObtainPermission(targetEvent = EVENT_WHATEVER_YOU_WANT_2, permissions = {Manifest.permission.WRITE_EXTERNAL_STORAGE})
-          private void doSomethingNeedPermission() {
-              ...
-          }
-          
-          //-----------
-          
-          //當使用者拒絕你發起的權限索取，事件必須與startWithPermissionCheck中的int一致
-          @DeniedPermission(targetEvent = EVENT_WHATEVER_YOU_WANT_2)
-          private void deniedPermission(){
-              ...
-          }
-          
-          //-----------
 
-          //當使用者選擇不再提醒並拒絕或者曾如此操做過，事件必須與startWithPermissionCheck中的int一致
-          @NeverAskPermission(targetEvent = EVENT_WHATEVER_YOU_WANT_2)
-          private void neverAskAgainPermission(){
-              ...
-          }
       }
 
 
@@ -147,8 +153,5 @@
 ---
 
 ### 備註remark
-- @DeniedPermission 非必要，只有在需要處理當使用者拒絕對應的targetEvent所需權限時須執行行為才需設置
-- @NeverAskPermission 非必要，只有在需要處理當使用者勾選不再提醒並拒絕或曾經如此操作對應的targetEvent所需權限時須執行行為才需設置
-- function的名稱可以自行定義不受限制.
-- 框架不支援抽象類中映射.
+
 
