@@ -1,6 +1,7 @@
 package com.noel.sung.library_npattern_permissionhelper;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,14 @@ public class PermissionHelper {
         return permissionHelper;
     }
 
+    //-------
+
+    /***
+     * 是否已經取得目標權限
+     */
+    public boolean isPermissionGet(@NonNull Activity activity, String[] permissionInfos) {
+        return checkPermissions(activity, permissionInfos) == null;
+    }
 
     //-------
 
@@ -86,8 +95,8 @@ public class PermissionHelper {
      * @param permissions
      * @param grantResults
      */
-    public void onRequestPermissionsResult(Activity activity,  @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(onPermissionStateListener !=null){
+    public void onRequestPermissionsResult(Activity activity, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (onPermissionStateListener != null) {
             // 授權被拒絕
             if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                 //不再提醒
@@ -115,8 +124,8 @@ public class PermissionHelper {
      * @param permissions
      * @param grantResults
      */
-    public void onRequestPermissionsResult(Fragment fragment , @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(onPermissionStateListener !=null){
+    public void onRequestPermissionsResult(Fragment fragment, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (onPermissionStateListener != null) {
             // 授權被拒絕
             if (grantResults.length > 0 && grantResults[0] != PackageManager.PERMISSION_GRANTED) {
                 //不再提醒
@@ -144,7 +153,7 @@ public class PermissionHelper {
      * @return
      */
     private String[] checkPermissions(@NonNull Activity activity, String[] permissionInfos) {
-        if (permissionInfos.length>0) {
+        if (permissionInfos.length > 0) {
             ArrayList<String> needPermissions = new ArrayList<>();
             for (String permission : permissionInfos) {
                 //該權限未授權本App
@@ -152,7 +161,7 @@ public class PermissionHelper {
                     needPermissions.add(permission);
                 }
             }
-            if (needPermissions.size()>0) {
+            if (needPermissions.size() > 0) {
                 return needPermissions.toArray(new String[0]);
             }
         }
